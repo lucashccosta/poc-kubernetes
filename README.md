@@ -14,6 +14,8 @@ Os componentes acima correspondem a estrutura necessária para a gerência de um
 em um NODE, que pode ser físico ou virtual, dependendo da estrutura do cluster. O NODE Master é responsável por gerenciar 
 o cluster Kubernetes e suas cargas de trabalho e/ou aplicações que é possível através destes componentes:
 
+![](./.github/assets/k8s_arch.png)
+
 ### PODs
 
 POD é a menor unidade que pode ser trabalhada no Kubernetes. É possível inserir 1 ou mais containers dentro de uma POD e 
