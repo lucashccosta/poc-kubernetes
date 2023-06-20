@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poc-k8s
+  namespace: default
+  labels:
+    app: poc-k8s
+spec:
+  selector:
+    matchLabels:
+      app: poc-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: poc-k8s
+    spec:
+      containers:
+      - name: poc-k8s
+        image: lucashccosta/poc-kubernetes-api:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          tcpSocket:
+            port: 9080
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 9080
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        ports:
+        - containerPort: 9080

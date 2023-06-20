@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: poc-k8s
+  labels:
+    name: poc-k8s
+spec:
+  selector:
+    matchLabels:
+      name: poc-k8s
+  replicas: 2 # two pods
+  template: # pod template
+    metadata:
+      labels:
+        name: poc-k8s
+    spec:
+      containers:
+      - name: poc-k8s-api
+        image: lucashccosta/poc-kubernetes-api:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 9080

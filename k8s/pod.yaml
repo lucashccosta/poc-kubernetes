@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: poc-k8s-api
+  labels:
+    name: poc-k8s-api
+spec:
+  containers:
+  - name: poc-k8s-api
+    image: lucashccosta/poc-kubernetes-api:latest
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 9080
