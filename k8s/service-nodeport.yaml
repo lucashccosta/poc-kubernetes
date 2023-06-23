@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: poc-k8s # relates to deployment.yaml: spec.selector.matchLabels
-  type: ClusterIP
+  type: NodePort
   sessionAffinity: None
   sessionAffinityConfig:
     clientIP:
@@ -16,3 +16,4 @@ spec:
     protocol: TCP
     port: 9080 # service port
     targetPort: 9080 # container port
+    nodePort: 30001 # k8s nodes port (>30000 && <32767)
