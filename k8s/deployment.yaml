@@ -30,11 +30,11 @@ spec:
         #         name: poc-k8s-env # configmap-env: metadata.name
         #         key: VERSION 
         resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-          limits:
-            cpu: 100m
+          requests: # minimo de recursos para aplicação rodar (reserva para cada pod nos nós do cluster)
+            cpu: 100m # 1vCPU: 1000m (milicores)
+            memory: 50Mi
+          limits: # limite máximo de recursos que pod pode utiizar num pico de processamento
+            cpu: 200m
             memory: 100Mi
         startupProbe: # identifica se a aplicação está pronta para receber requisições após o pod iniciar; após sucesso, libera readinessProbe e livenessProbe
           httpGet:

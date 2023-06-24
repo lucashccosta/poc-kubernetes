@@ -55,6 +55,9 @@ kubectl get deployments
 
 # visualizar versões dos deployments
 kubectl rollout history deployment <DEPLOYMENT_NAME>
+
+# visualizar consumo dos recursos do pod
+kubectl top pod <POD_NAME>
 ```
 
 # Utilizando proxy para acessar a API do K8s
@@ -117,3 +120,11 @@ http://<192.168.49.2>:<30001>/api/v1/health
 ```
 
 * A porta _30001_ foi definida no arquivo `service-nodeport.yaml` em `spec.ports.nodePort`.
+
+# Teste de stress com fortio (verificar funcionamento do hpa - horizontal pod autoscaler)
+
+```sh
+# cria pod rodando comando de teste de stress
+# "http://poc-k8s/api/v1/health": service.yaml => metadata.name
+kubectl run -it --generator=run-pod/v1 fortio -rm --image=fortio/fortio -- load -qps 800 -t 120s -c 100 "http://poc-k8s/api/v1/health" 
+```
