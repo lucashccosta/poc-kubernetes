@@ -58,6 +58,12 @@ kubectl rollout history deployment <DEPLOYMENT_NAME>
 
 # visualizar consumo dos recursos do pod
 kubectl top pod <POD_NAME>
+
+# visualizar clusters disponíveis para acesso (minikube, kind, digital ocean, aws, etc)
+kubectl config get-contexts 
+
+# utilizar cluster disponível nos comandos kubectl
+kubectl config use-context <CONTEXT_NAME>
 ```
 
 # Utilizando proxy para acessar a API do K8s

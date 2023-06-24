@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: poc-k8s-pvc
+  namespace: default
+  labels:
+    app: poc-k8s
+spec:
+  accessModes:
+  - ReadWriteOnce # somente pods no mesmo nó poderá acessar o volume
+  resources:
+    requests:
+      storage: 2Gi

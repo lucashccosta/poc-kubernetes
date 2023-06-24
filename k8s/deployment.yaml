@@ -59,4 +59,12 @@ spec:
           timeoutSeconds: 1
           successThreshold: 1
         ports:
-        - containerPort: 9080
+          - containerPort: 9080
+        volumeMounts:
+          - mountPath: "/app/pvc"
+            name: poc-k8s-volume
+
+      volumes:
+        - name: poc-k8s-volume
+          persistentVolumeClaim:
+            claimName: poc-k8s-pvc
