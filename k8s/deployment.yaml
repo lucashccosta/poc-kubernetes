@@ -36,22 +36,27 @@ spec:
           limits:
             cpu: 100m
             memory: 100Mi
-        livenessProbe:
-          tcpSocket:
-            port: 9080
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-          periodSeconds: 10
-        readinessProbe:
+        startupProbe: # identifica se a aplicação está pronta para receber requisições após o pod iniciar; após sucesso, libera readinessProbe e livenessProbe
           httpGet:
             path: /api/v1/health
             port: 9080
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
+          periodSeconds: 3
+          failureThreshold: 30 # 90s de verificação
+        readinessProbe: # retira tráfego de requisições do pod em caso de falha
+          httpGet:
+            path: /api/v1/health
+            port: 9080
+          periodSeconds: 3
+          failureThreshold: 1
+          timeoutSeconds: 1
           successThreshold: 1
-          failureThreshold: 3
-          periodSeconds: 10
+        livenessProbe: # identifica se aplicação está saudável (respondendo com sucesso); recria o container em caso de falha
+          httpGet:
+            path: /api/v1/health
+            port: 9080
+          periodSeconds: 5
+          failureThreshold: 1
+          timeoutSeconds: 1
+          successThreshold: 1
         ports:
         - containerPort: 9080
