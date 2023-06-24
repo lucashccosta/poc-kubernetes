@@ -18,6 +18,17 @@ spec:
       containers:
       - name: poc-k8s
         image: lucashccosta/poc-kubernetes-api:latest
+        envFrom:
+          - configMapRef:
+              name: poc-k8s-env # configmap-env.yaml: metadata.name
+          - secretRef:
+              name: poc-k8s-secrets # secrets.yaml: metadata.name
+        # env: 
+        #   - name: VERSION
+        #     valueFrom:
+        #       configMapKeyRef:
+        #         name: poc-k8s-env # configmap-env: metadata.name
+        #         key: VERSION 
         resources:
           requests:
             cpu: 100m

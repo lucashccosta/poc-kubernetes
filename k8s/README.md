@@ -20,25 +20,6 @@ Para remover recursos no cluster k8s, execute no terminal o comando abaixo com o
 kubectl delete -f <FILE.yaml>
 ```
 
-# Port-Forward
- 
-Para acessar a API no seu ambiente local, execute o comando abaixo para criar um port-forward para gerar um 
-redirecionamento de portas entre o cluster k8s e o ambiente local:
-
-```sh
-# redireciona portas do pod para acesso via localhost
-kubectl port-forward pod/k8s-api 9080:9080
-
-# redireciona portas do service para acesso via localhost
-kubectl port-forward svc/poc-k8s 9080:9080
-```
-
-Acesse o navegador ou um cliente Rest e informe a URL:
-
-```sh
-http://localhost:9080/api/v1/health
-```
-
 # Rollout e Revisões
 
 Para voltar a versão do deployment, execute os comandos abaixo:
@@ -90,7 +71,26 @@ Acesse o navegador ou um cliente Rest e informe a URL:
 http://localhost:9000
 ```
 
-# Utilizando NodePort para acessar a API do backend
+# Utilizando Port-Forward para acessar a API do backend (utilizar o service.yaml)
+ 
+Para acessar a API no seu ambiente local, execute o comando abaixo para criar um port-forward para gerar um 
+redirecionamento de portas entre o cluster k8s e o ambiente local:
+
+```sh
+# redireciona portas do pod para acesso via localhost
+kubectl port-forward pod/k8s-api 9080:9080
+
+# redireciona portas do service para acesso via localhost
+kubectl port-forward svc/poc-k8s 9080:9080
+```
+
+Acesse o navegador ou um cliente Rest e informe a URL:
+
+```sh
+http://localhost:9080/api/v1/health
+```
+
+# Utilizando NodePort para acessar a API do backend (utilizar o service-nodeport.yaml)
 
 Para acessar a API do backend (`/api`), execute o comando no terminal:
 
